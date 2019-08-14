@@ -1,4 +1,3 @@
-import java.util.*;
 /*  
 "CaesarShift"
 A Simple Program that takes a string and applies a Caesar Shift 
