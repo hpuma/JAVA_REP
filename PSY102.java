@@ -48,7 +48,7 @@ public class PSY102{
             return -1;
         }
         else{
-            double totalSum = 0;\
+            double totalSum = 0;
             // Iterated through both arrays and sums up each data1 * data2 
             for(int i = 0; i < N; i++){
                 totalSum+=(data1[i] * data2[i]);
