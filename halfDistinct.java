@@ -6,7 +6,7 @@ S: 9/12/19
 E: 9/13/19
 Given a set A of n integers, determine whether or not an array has an integer k that occurs 
 at least n/2 times */
-public class halfDistinct{
+public class HalfDistinct{
     // Testing
     public static void main(String[] args) {
         int testArr[] = {1,1,7,1,1};

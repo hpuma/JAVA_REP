@@ -72,7 +72,7 @@ public class PSY102{
         return (formulaThree()/(Math.sqrt(formula(data1) * formula(data2))));
     }
     // Computes and prints the value for each.
-    public static void printResults(){
+    public void printResults(){
         System.out.println("R VALUE:\t" + rValue());
         System.out.println("I:\t" + formula(data1));
         System.out.println("II:\t" + formula(data2));
