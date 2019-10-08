@@ -5,7 +5,7 @@ import java.util.HashMap;
 S: 9/12/19
 E: 9/13/19
 Given a set A of n integers, determine whether or not an array has an integer k that occurs 
-at least n/2 times */
+at least n/2 times. */
 public class HalfDistinct{
     // Testing
     public static void main(String[] args) {
