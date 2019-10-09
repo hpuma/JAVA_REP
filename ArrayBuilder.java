@@ -1,8 +1,9 @@
 import static java.lang.Math.random;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 // Source for Generator: https://dzone.com/articles/random-number-generation-in-java
-public class ArrayBuilder {
+public class ArrayBuilder{
     // TESTING
     public static void main(String[] args) {
         // TEST 1 SHUFFLE ARRAY
@@ -47,7 +48,7 @@ public class ArrayBuilder {
     }
 
     // ARRAY MAKER BASED ON DATA.
-    // ShuffleArray: Returns the shuffled version of the Array.
+    // ShuffleArray: Returns the shuffled version of the Data Array.
     public int[] ShuffleArray() {
         if(!validData()){
             System.out.println("DATA ARRAY IS NOT SUFFICIENT LENGTH!");
@@ -79,7 +80,23 @@ public class ArrayBuilder {
         }
         return ShuffledArray;
     }
-
+    public Object[] extractEven(){
+        if(!validData()){
+            System.out.println("THE DATA ARRAY IS NOT VALID!");
+            return null;
+        }
+        ArrayList<Integer> EvenList = new ArrayList<Integer>();
+        for(int Item: Data){
+            if(Item%2 == 0){
+                EvenList.add(Item);
+            }
+        }
+        return EvenList.toArray();
+    }
+    public Object[] extractOdd(){
+        // TODO
+        return null;
+    }
     // RANDOM ARRAY GENERATORS. 
     // NOTE: DATA ARRAY IS NOT BEING REFERENCED HERE!
     // Random Array: Generates an array with a specific size and values at a certain interval.
@@ -99,7 +116,7 @@ public class ArrayBuilder {
         }
         return NewArray;
     }
-    // NoRepeatArray: Generates an array with a specific size and values at a certain interval with NOT REPETITIONS.
+    // NoRepeatArray: Generates an array with a specific size and values at a certain interval with NO REPETITIONS.
     public int[] NoRepeatArray(int Size, int LeftBound, int RightBound){
         if(Size < 0 || RightBound < LeftBound || RightBound - LeftBound < Size){
             System.out.println("INCORRECT BOUNDS!");
