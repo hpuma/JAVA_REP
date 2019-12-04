@@ -1,58 +1,77 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class PopulateTable {
     public static void main(String[] args) throws IOException {
-        PopulateTable test = new PopulateTable("HenryDB", 25);
-        String[] sourceData = {"src1.txt","src2.txt"};
-        System.out.println(test.InsertData("PopulateOutput.sql", sourceData));
+        PopulateTable test = new PopulateTable("students", 100);
+        String[] sourceData = {"studentID.txt","firstName.txt","lastName.txt","sex.txt"};
+        System.out.println(test.InsertData("PopulateStudents.sql", "StudentsData",sourceData));
     }
     private String tableName;
+    private String workingDirectory;
     private int numEntries;
-    private Scanner scnr;
-    private FileWriter write;
-    ArrayList<ArrayList<String>> fileSetLines;
-    ArrayList<String> fileLines;
+    Scanner scnr;
+    FileWriter write;
+    ArrayList<ArrayList<String>> allFileLines;
+    ArrayList<String> thisFileLines;
 
     PopulateTable(String tableName, int numEntries) {
         this.tableName = tableName;
         this.numEntries = numEntries;
-        this.fileSetLines = null;
-        this.fileLines = null;
+        this.workingDirectory = System.getProperty("user.dir");
+        this.allFileLines = null;
+        this.thisFileLines = null;
     }
-    public boolean InsertData(String targetFile, String[] filePaths){
+    private void clearFile(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath, false); 
+        PrintWriter pw= new PrintWriter(fw, false);
+        pw.flush();
+        pw.close();
+        fw.close();
+    }
+    private String format(String str){
+        if(str != null && str.matches("^[a-zA-Z]*$")){
+            return "\"" +str + "\"";
+        }
+        return str;
+    }
+    public boolean InsertData(String targetFile, String dataFolderName, String[] dataFileNames){
         try{
-            fileSetLines = new ArrayList<ArrayList<String>>();
+            clearFile(targetFile);
+            allFileLines = new ArrayList<ArrayList<String>>();
             // Adding the lines of each file into a 2d Array list.
-            for(String thisFile: filePaths){
-                scnr  = new Scanner(new File(thisFile));
-                fileLines = new ArrayList<String>();
+            String dataPath = workingDirectory + "\\" + dataFolderName +  "\\";
+            for(String dataFile: dataFileNames){
+                scnr  = new Scanner(new File(dataPath + dataFile));
+                thisFileLines = new ArrayList<String>();
                 while(scnr.hasNextLine()){
-                    fileLines.add(scnr.nextLine());
+                    thisFileLines.add(format(scnr.nextLine().replaceAll("[^A-Za-z0-9]","")));
                 }
-                if(fileLines.size() < numEntries){
-                    System.out.println(thisFile + " DOES NOT HAVE "+ numEntries + " ENTRIES");
+                if(thisFileLines.size() < numEntries){
+                    System.out.println(dataFile + " DOES NOT HAVE "+ numEntries + " ENTRIES");
                     return false;
                 }
-                fileSetLines.add(fileLines);
+                allFileLines.add(thisFileLines);
             }
-            write = new FileWriter(new File(targetFile),true);
-            String StmtBuild = "INSERT INTO " + tableName;
-            write.write(StmtBuild + System.getProperty("line.separator"));
 
+            write = new FileWriter(new File(targetFile),true);
+
+            String StmtBuild = "";
             for(int i = 0; i < numEntries; i++){
-                StmtBuild = "VALUES (";
-                for(int j = 0; j < fileSetLines.size(); j++){
-                    StmtBuild+=fileSetLines.get(j).get(i);
-                    if(j != fileSetLines.size()-1){
+                StmtBuild = "INSERT INTO " + tableName + " VALUES (";
+                for(int j = 0; j < allFileLines.size(); j++){
+                    StmtBuild += allFileLines.get(j).get(i);
+                    if(j != allFileLines.size()-1){
                         StmtBuild+=", ";
                     }   
                 }
-                StmtBuild+=");";   
+                StmtBuild += ");";   
                 write.write(StmtBuild + System.getProperty("line.separator"));         
             }
             write.close();
@@ -61,7 +80,7 @@ public class PopulateTable {
         } catch(IOException error){
             System.out.println(error);
         }
-        System.out.println("SUCCESSFUL");
+        System.out.println("ADDED CONTENTS FROM " + Arrays.toString(dataFileNames)+ " TO \"" + targetFile+"\"");
         return true;
     }
 }

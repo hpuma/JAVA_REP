@@ -1,0 +1,5 @@
+Algorithms
+Software Design
+Data-Structures
+Computer Fundamentals
+Statistics
