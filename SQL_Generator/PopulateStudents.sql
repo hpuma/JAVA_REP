@@ -1,4 +1,4 @@
-INSERT INTO students VALUES (87857353, "Emma", "Lovejoy", "F");
+INSERT INTO students VALUES (23589924, "Henry", "Puma", "M");
 INSERT INTO students VALUES (62751612, "Olivia", "Carmichael", "F");
 INSERT INTO students VALUES (06483173, "Ava", "Piessens", "F");
 INSERT INTO students VALUES (57415496, "Isabella", "Vansaun", "F");
