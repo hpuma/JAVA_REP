@@ -4,7 +4,7 @@ public class ArraytoList{
     public static void main(String[] args) {
         ArraytoList test = new ArraytoList();
 
-        String[][] testList = {{"2018","2019","2017"}};
+        String[][] testList = {{"22100","21100","22100","21700","22100","22100"}};
 
         test.generateLists(testList, 100);
     }
