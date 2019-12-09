@@ -15,7 +15,7 @@ public class CreateSQL{
             String[] classFiles = {"classCode.txt","courseID.txt","studentID.txt","year.txt","semester.txt","GPA.txt"};
 
             // Used to connect to the database and pass all queries
-            StatementQuery connect = new StatementQuery("jdbc:mysql://localhost/studentdb?","root","89a55cc5d12E3$$$");
+            StatementQuery connect = new StatementQuery("jdbc:mysql://localhost/studentdb?","root","****************");
 
             // Retrieving the data for each table based on the files provided
             ArrayList<ArrayList<String>> AllStudentLines = students.getFileLines("src\\StudentsData",studentFiles);
