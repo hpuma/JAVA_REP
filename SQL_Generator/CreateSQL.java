@@ -49,10 +49,6 @@ public class CreateSQL{
         } catch (NullPointerException ex){
             System.out.println("Exception: " + ex.getMessage());
             ex.printStackTrace();
-        }
-
-
-
-        
+        }        
     }
 }
