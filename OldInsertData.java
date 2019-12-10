@@ -1,4 +1,7 @@
-public class OldInsertData{
+import java.io.File;
+import java.util.ArrayList;
+
+public class OldInsertData {
     public static void main(String[] args) {}
     // This works but it doesn't add the file data in the correct column order, must find a way to insert in the correct order.
     public boolean InsertData(String targetFile, String dataFolderName){
