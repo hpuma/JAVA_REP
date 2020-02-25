@@ -1,0 +1,9 @@
+CREATE TABLE Classes (
+    classCode INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (classCode),
+    courseID INT UNSIGNED NOT NULL,
+    studentID INT UNSIGNED NOT NULL,
+    year INT UNSIGNED NOT NULL,
+    semester VARCHAR(255),
+    GPA VARCHAR(1)
+);
